@@ -1,5 +1,5 @@
 import {useState, useEffect, useRef} from 'react';
-import {coktailDB} from '../api/coktailDB';
+import {cocktailDB} from '../api/cocktailDB';
 import {CoktailResponse, Drink} from '../interfaces/CoktailResponseInterface';
 
 // strDrinkThum
@@ -12,7 +12,7 @@ const useCoktailGeneral = () => {
   );
 
   const loadCoktails = async () => {
-    const resp = await coktailDB.get<CoktailResponse>(nextCategorie.current);
+    const resp = await cocktailDB.get<CoktailResponse>(nextCategorie.current);
 
     // nextCategorie.current = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail`;
     // setCoktail([...coktail, ...resp.data.drinks]);

@@ -27,7 +27,9 @@ const CocktailScreen = () => {
         keyExtractor={({strDrink}) => strDrink}
         renderItem={({item}) => <CocktailCard cocktail={item} />}
         ListHeaderComponent={() => (
-          <Text style={{color: theme.colors.text}}>CocktailScreen</Text>
+          <Text style={{color: theme.colors.text, fontSize: 22}}>
+            CocktailScreen
+          </Text>
         )}
         showsVerticalScrollIndicator={false}
       />

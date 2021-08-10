@@ -16,7 +16,7 @@ export const lightTheme: ThemeState = {
     background: 'white',
     card: 'red',
     text: 'black',
-    border: 'black',
+    border: colors.quintet,
     notification: colors.whitebone,
   },
 };
@@ -30,7 +30,7 @@ export const darkTheme: ThemeState = {
     background: colors.secundary,
     card: 'black',
     text: 'white',
-    border: 'white',
+    border: colors.quintet,
     notification: colors.primary,
   },
 };
