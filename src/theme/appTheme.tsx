@@ -7,7 +7,7 @@ export const colors = {
   quartet: '#48485B',
   quintet: '#797993',
   white: '#FFFFFF',
-  whitebone: '#e1e1e1',
+  whitebone: '#c1c1c1',
   purple: '#6542bb',
 };
 

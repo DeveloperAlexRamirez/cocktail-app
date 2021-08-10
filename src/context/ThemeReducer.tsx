@@ -12,11 +12,11 @@ export const lightTheme: ThemeState = {
   dark: false,
   dividerColor: 'rgba(0, 0, 0, 0.3)',
   colors: {
-    primary: 'black',
+    primary: colors.quintet,
     background: 'white',
-    card: 'red',
+    card: colors.primary,
     text: 'black',
-    border: colors.quintet,
+    border: colors.primary,
     notification: colors.whitebone,
   },
 };
@@ -26,9 +26,9 @@ export const darkTheme: ThemeState = {
   dark: true,
   dividerColor: 'rgba(0, 0, 0, 0.3)',
   colors: {
-    primary: 'white',
+    primary: colors.primary,
     background: colors.secundary,
-    card: 'black',
+    card: colors.secundary,
     text: 'white',
     border: colors.quintet,
     notification: colors.primary,
