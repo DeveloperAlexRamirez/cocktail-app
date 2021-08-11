@@ -20,6 +20,7 @@ export interface DrinkCategories {
 
 export interface CocktailDetails {
   strDrink: string;
+  idDrink: string;
   strAlcoholic: string;
   strCategory: string;
   strDrinkThumb: string;
