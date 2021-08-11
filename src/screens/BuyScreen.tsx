@@ -13,19 +13,18 @@ import {
 import {ThemeContext} from '../context/ThemeContext';
 import {RootStackParams} from '../stack/Navigator';
 import useCocktailDetails from '../hooks/useCocktailDetails';
-import {useCounter} from '../hooks/useCounter';
 
 import {colors} from '../theme/appTheme';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {showIngredients} from '../helper/showIngredients';
-// import {FlatList} from 'react-native';
+
+import Icon from 'react-native-vector-icons/Ionicons';
+import Costs from '../components/Costs';
+import BuyCardTarget from '../components/BuyCardTarget';
 
 interface Props extends StackScreenProps<RootStackParams, 'BuyScreen'> {}
 
 const BuyScreen = ({route, navigation}: Props) => {
   const params = route.params;
-
-  const {counter, increase, decrement} = useCounter(1);
 
   const {cocktaildetails, isloading} = useCocktailDetails(
     params.cocktail.idDrink,
@@ -49,27 +48,26 @@ const BuyScreen = ({route, navigation}: Props) => {
 
   return (
     <View style={{flex: 1, backgroundColor: theme.colors.background}}>
-      <View
+      {/* TODO: Btn para regresar */}
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
         style={{
+          zIndex: 999,
           backgroundColor: theme.colors.primary,
-          width: 50,
-          height: 40,
+          width: 55,
+          height: 50,
           top: 30,
           left: 30,
           borderRadius: 10,
           position: 'absolute',
-          zIndex: 999,
-          alignItems: 'center',
-        }}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon
-            name="chevron-back-outline"
-            size={35}
-            color={theme.colors.text}
-          />
-        </TouchableOpacity>
-      </View>
 
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <Icon name="chevron-back-outline" size={25} color="white" />
+      </TouchableOpacity>
+
+      {/* TODO: Contenedor e imagen del cocktail */}
       <View>
         <View style={{...styles.imageContainer, height: height * 0.5}}>
           <Image
@@ -78,21 +76,22 @@ const BuyScreen = ({route, navigation}: Props) => {
           />
         </View>
 
+        {/* TODO: Contenedor del header del card containerEncima */}
+
         <View
           style={{
             ...styles.containerEncima,
-            top: height * 0.47,
-            height: height * 0.3,
-            backgroundColor: theme.colors.notification,
+            top: height * 0.44,
+            height: height * 0.36,
+            backgroundColor: theme.colors.bgcardBuy,
           }}>
-          {/* Contenedor del header del card containerEncima */}
-          <View style={{left: 40, top: 40, width: 280}}>
+          {/* TODO: Contenedor del header del card containerEncima */}
+          <View style={{left: 40, top: 30, width: 280}}>
             <Text style={{...styles.textCardEncima, color: theme.colors.text}}>
               {params.cocktail.strDrink}
             </Text>
             <Text
               style={{
-                marginTop: 10,
                 fontSize: 22,
                 color: theme.colors.border,
               }}>
@@ -100,8 +99,11 @@ const BuyScreen = ({route, navigation}: Props) => {
             </Text>
           </View>
 
-          {/* Barra de ingredientes */}
-          <View style={{left: 0, marginTop: 50}}>
+          {/* Target for increase or decrement */}
+          <BuyCardTarget cantidad />
+
+          {/* TODO: Barra de ingredientes */}
+          <View style={{left: 0, marginTop: 50, marginBottom: 20}}>
             <FlatList
               style={{
                 width: 'auto',
@@ -114,15 +116,12 @@ const BuyScreen = ({route, navigation}: Props) => {
                 return (
                   <View
                     style={{
-                      marginRight: 10,
-                      backgroundColor: theme.colors.card,
-                      justifyContent: 'center',
-                      width: 'auto',
-                      height: 60,
-                      padding: 10,
-                      borderRadius: 10,
+                      ...styles.ingredientItem,
+                      backgroundColor: theme.colors.notification,
+                      borderColor: theme.colors.bordercolors,
                     }}>
-                    <Text style={{color: 'white', fontWeight: 'bold'}}>
+                    <Text
+                      style={{color: theme.colors.border, fontWeight: 'bold'}}>
                       {item}
                     </Text>
                   </View>
@@ -133,70 +132,29 @@ const BuyScreen = ({route, navigation}: Props) => {
             />
           </View>
 
-          {/* Contenedor de parches xd */}
-          <View
-            style={{
-              ...styles.cardSale,
-              flexDirection: 'column',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-              padding: 10,
-            }}>
-            <TouchableOpacity
-              style={{
-                backgroundColor: theme.colors.notification,
-                alignItems: 'center',
-                width: 30,
-                height: 30,
-                borderRadius: 100,
-              }}
-              onPress={increase}>
-              <Text style={{...styles.textBuy, color: theme.colors.text}}>
-                +
-              </Text>
-            </TouchableOpacity>
+          {/* TODO: Card de decrement and increase */}
 
-            <View
-              style={{
-                backgroundColor: theme.colors.border,
-                alignItems: 'center',
-                width: 30,
-                height: 30,
-                borderRadius: 100,
-              }}>
-              <Text style={styles.textBuy}>{counter}</Text>
-            </View>
-
-            <TouchableOpacity
-              style={{
-                backgroundColor: theme.colors.notification,
-                alignItems: 'center',
-                width: 30,
-                height: 30,
-                borderRadius: 100,
-              }}
-              onPress={decrement}>
-              <Text style={{...styles.textBuy, color: theme.colors.text}}>
-                -
-              </Text>
-            </TouchableOpacity>
-          </View>
+          {/* Precios */}
+          <Costs />
         </View>
       </View>
 
+      {/* TODO: Contenedor de parches xd */}
       <View
         style={{
           ...styles.effectCardEncima,
-          backgroundColor: theme.colors.notification,
+          backgroundColor: theme.colors.bgcardBuy,
         }}
       />
 
       <View
         style={{
           ...styles.parcheCard,
-          backgroundColor: theme.colors.notification,
+          backgroundColor: theme.colors.bgcardBuy,
         }}
       />
+      {/* TODO: Pagar cont tarjeta */}
+      <BuyCardTarget top={790} />
     </View>
   );
 };
@@ -221,11 +179,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 100,
     right: 0,
-    bottom: 90,
-    transform: [{rotate: '1deg'}],
-    borderBottomRightRadius: 30,
+    bottom: 65,
+    borderBottomRightRadius: 50,
     borderBottomLeftRadius: 100,
-    height: 120,
+    height: 140,
   },
 
   textCardEncima: {
@@ -233,32 +190,25 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  cardSale: {
-    position: 'absolute',
-    right: 50,
-    top: -30,
-    backgroundColor: '#48485B',
-    width: 80,
-    height: 140,
-    borderRadius: 10,
-  },
-
-  textBuy: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: 'white',
-    textAlign: 'center',
-  },
-
   parcheCard: {
     position: 'absolute',
     width: '100%',
-    left: 10,
-    bottom: 120,
+    bottom: 95,
     transform: [{rotate: '10deg'}],
     borderBottomRightRadius: 40,
     borderBottomLeftRadius: 20,
     height: 70,
+  },
+
+  ingredientItem: {
+    marginRight: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 'auto',
+    // height: 60,
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1.5,
   },
 });
 

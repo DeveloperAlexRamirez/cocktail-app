@@ -18,6 +18,12 @@ export const lightTheme: ThemeState = {
     text: 'black',
     border: colors.primary,
     notification: colors.whitebone,
+    bgIngredientes: colors.quintet,
+    bordercolors: colors.quartet,
+    bgcardBuy: colors.whitebone,
+    cardsale: colors.quintet,
+    textPrice: colors.whitebone,
+    bgCardCocktail: colors.white,
   },
 };
 
@@ -32,6 +38,12 @@ export const darkTheme: ThemeState = {
     text: 'white',
     border: colors.quintet,
     notification: colors.primary,
+    bgIngredientes: colors.secundary,
+    bordercolors: colors.quartet,
+    cardsale: colors.quartet,
+    bgcardBuy: colors.primary,
+    textPrice: colors.quintet,
+    bgCardCocktail: colors.primary,
   },
 };
 

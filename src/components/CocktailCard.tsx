@@ -15,46 +15,48 @@ const CocktailCard = ({cocktail}: Props) => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity
-      activeOpacity={0.8}
-      onPress={() =>
-        navigation.navigate('BuyScreen', {
-          cocktail: cocktail,
-        })
-      }>
-      <View
-        style={{
-          ...styles.cardContainer,
-          backgroundColor: theme.colors.notification,
-        }}>
-        <View>
-          <FadeInImage
-            uri={cocktail.strDrinkThumb}
-            style={{width: 80, height: 80, borderRadius: 10, marginLeft: 5}}
-          />
+    <View style={{flex: 1}}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={() =>
+          navigation.navigate('BuyScreen', {
+            cocktail: cocktail,
+          })
+        }>
+        <View
+          style={{
+            ...styles.cardContainer,
+            backgroundColor: theme.colors.bgCardCocktail,
+          }}>
+          <View>
+            <FadeInImage
+              uri={cocktail.strDrinkThumb}
+              style={{width: 80, height: 80, borderRadius: 10, marginLeft: 5}}
+            />
+          </View>
+          <View style={{justifyContent: 'center'}}>
+            <Text style={{...styles.textCard, color: theme.colors.text}}>
+              {cocktail.strDrink}
+            </Text>
+            <Text
+              style={{
+                ...styles.textCard,
+                color: 'grey',
+                fontSize: 16,
+              }}>
+              id: {cocktail.idDrink}
+            </Text>
+          </View>
         </View>
-        <View style={{justifyContent: 'center'}}>
-          <Text style={{...styles.textCard, color: theme.colors.text}}>
-            {cocktail.strDrink}
-          </Text>
-          <Text
-            style={{
-              ...styles.textCard,
-              color: 'grey',
-              fontSize: 16,
-            }}>
-            id: {cocktail.idDrink}
-          </Text>
-        </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   cardContainer: {
     width: '100%',
-    height: 110,
+    height: 100,
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 10,
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.39,
     shadowRadius: 10,
 
-    elevation: 13,
+    elevation: 2,
   },
 
   textCard: {
