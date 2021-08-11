@@ -5,11 +5,12 @@ import {ThemeContext} from '../context/ThemeContext';
 import {colors, globalStyles} from '../theme/appTheme';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import CocktailCard from '../components/CocktailCard';
+import BtnBack from '../components/BtnBack';
 
 const CocktailScreen = () => {
   const {top} = useSafeAreaInsets();
 
-  const {loading, coktail, loadCoktails} = useCoktailGeneral();
+  const {loading, coktail} = useCoktailGeneral();
   const {theme} = useContext(ThemeContext);
 
   if (loading) {
@@ -21,13 +22,19 @@ const CocktailScreen = () => {
   }
 
   return (
-    <View style={{...globalStyles.globalMargin, marginTop: top + 20}}>
+    <View style={globalStyles.globalMargin}>
+      <BtnBack left={0} />
       <FlatList
         data={coktail}
         keyExtractor={({strDrink}) => strDrink}
         renderItem={({item}) => <CocktailCard cocktail={item} />}
         ListHeaderComponent={() => (
-          <Text style={{color: theme.colors.text, fontSize: 22}}>
+          <Text
+            style={{
+              color: theme.colors.text,
+              fontSize: 32,
+              paddingTop: top + 10,
+            }}>
             CocktailScreen
           </Text>
         )}

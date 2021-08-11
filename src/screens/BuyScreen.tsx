@@ -153,8 +153,62 @@ const BuyScreen = ({route, navigation}: Props) => {
           backgroundColor: theme.colors.bgcardBuy,
         }}
       />
+
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 15,
+          width: '100%',
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}>
+        <View
+          style={{
+            marginHorizontal: 40,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: 10,
+          }}>
+          <View
+            style={{
+              alignItems: 'center',
+            }}>
+            <Icon name="cart-outline" size={35} color="white" />
+            <Text
+              style={{color: theme.colors.border, marginTop: 2, fontSize: 12}}>
+              Total Drinks
+            </Text>
+          </View>
+
+          <View
+            style={{
+              alignItems: 'center',
+              marginRight: 40,
+            }}>
+            <Text
+              style={{
+                color: theme.colors.text,
+                fontSize: 27,
+                marginRight: 10,
+                marginBottom: 2,
+                fontWeight: 'bold',
+              }}>
+              $32
+            </Text>
+            <Text style={{color: theme.colors.border, fontSize: 12}}>
+              Total Price
+            </Text>
+          </View>
+
+          <View style={{backgroundColor: 'red'}}>
+            <Text>Hola</Text>
+          </View>
+        </View>
+      </View>
+
       {/* TODO: Pagar cont tarjeta */}
-      <BuyCardTarget top={790} />
+      <BuyCardTarget top={780} height={130} />
     </View>
   );
 };
