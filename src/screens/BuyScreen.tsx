@@ -7,7 +7,6 @@ import {
   StyleSheet,
   Dimensions,
   ActivityIndicator,
-  TouchableOpacity,
   FlatList,
 } from 'react-native';
 import {ThemeContext} from '../context/ThemeContext';
@@ -17,21 +16,26 @@ import useCocktailDetails from '../hooks/useCocktailDetails';
 import {colors} from '../theme/appTheme';
 import {showIngredients} from '../helper/showIngredients';
 
-import Icon from 'react-native-vector-icons/Ionicons';
 import Costs from '../components/Costs';
 import BuyCardTarget from '../components/BuyCardTarget';
+import BtnBack from '../components/BtnBack';
+
+import Icon from 'react-native-vector-icons/Ionicons';
+import {CarContext} from '../context/CarContext';
 
 interface Props extends StackScreenProps<RootStackParams, 'BuyScreen'> {}
 
 const BuyScreen = ({route, navigation}: Props) => {
   const params = route.params;
 
+  const {carState} = useContext(CarContext);
+
   const {cocktaildetails, isloading} = useCocktailDetails(
     params.cocktail.idDrink,
   );
 
   const {theme} = useContext(ThemeContext);
-  const {height} = Dimensions.get('screen');
+  const {height, width} = Dimensions.get('screen');
 
   if (isloading) {
     return (
@@ -48,28 +52,12 @@ const BuyScreen = ({route, navigation}: Props) => {
 
   return (
     <View style={{flex: 1, backgroundColor: theme.colors.background}}>
-      {/* TODO: Btn para regresar */}
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        style={{
-          zIndex: 999,
-          backgroundColor: theme.colors.primary,
-          width: 55,
-          height: 50,
-          top: 30,
-          left: 30,
-          borderRadius: 10,
-          position: 'absolute',
+      <Text style={{color: 'white'}}>{JSON.stringify(carState, null, 3)}</Text>
 
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <Icon name="chevron-back-outline" size={25} color="white" />
-      </TouchableOpacity>
-
+      <BtnBack sumaTop={-10} topBtn={20} left={20} />
       {/* TODO: Contenedor e imagen del cocktail */}
       <View>
-        <View style={{...styles.imageContainer, height: height * 0.5}}>
+        <View style={{...styles.imageContainer, height: height * 0.6}}>
           <Image
             source={{uri: params.cocktail.strDrinkThumb}}
             style={styles.imageCocktail}
@@ -77,38 +65,43 @@ const BuyScreen = ({route, navigation}: Props) => {
         </View>
 
         {/* TODO: Contenedor del header del card containerEncima */}
-
         <View
           style={{
             ...styles.containerEncima,
-            top: height * 0.44,
-            height: height * 0.36,
+            top: height * 0.45,
+            // height: height * 0.39,
+            height: height * 0.4,
             backgroundColor: theme.colors.bgcardBuy,
+            // backgroundColor: 'red',
           }}>
           {/* TODO: Contenedor del header del card containerEncima */}
-          <View style={{left: 40, top: 30, width: 280}}>
+          <View
+            style={{
+              left: 20,
+              top: 30,
+              // Esto se hace para que haya compatibiliadad con las pantallas
+              width: width / 1.5,
+            }}>
             <Text style={{...styles.textCardEncima, color: theme.colors.text}}>
               {params.cocktail.strDrink}
             </Text>
             <Text
               style={{
-                fontSize: 22,
+                fontSize: 15,
                 color: theme.colors.border,
               }}>
               {cocktaildetails[0].strCategory}
             </Text>
           </View>
 
-          {/* Target for increase or decrement */}
-          <BuyCardTarget cantidad />
+          {/* <BuyCardTarget cantidad bottom={height * 0.25} /> */}
 
           {/* TODO: Barra de ingredientes */}
-          <View style={{left: 0, marginTop: 50, marginBottom: 20}}>
+          <View style={{left: 0, marginTop: 50, marginBottom: 10}}>
             <FlatList
               style={{
                 width: 'auto',
-                marginLeft: 40,
-                marginTop: 10,
+                marginLeft: 20,
               }}
               data={showIngredients(cocktaildetails[0])}
               keyExtractor={index => index}
@@ -121,7 +114,11 @@ const BuyScreen = ({route, navigation}: Props) => {
                       borderColor: theme.colors.bordercolors,
                     }}>
                     <Text
-                      style={{color: theme.colors.border, fontWeight: 'bold'}}>
+                      style={{
+                        color: theme.colors.border,
+                        fontWeight: 'bold',
+                        fontSize: 12,
+                      }}>
                       {item}
                     </Text>
                   </View>
@@ -140,7 +137,9 @@ const BuyScreen = ({route, navigation}: Props) => {
       </View>
 
       {/* TODO: Contenedor de parches xd */}
-      <View
+
+      {/* TODO: PARCHEEEEEEEEEEEEEEEES */}
+      {/* <View
         style={{
           ...styles.effectCardEncima,
           backgroundColor: theme.colors.bgcardBuy,
@@ -152,7 +151,7 @@ const BuyScreen = ({route, navigation}: Props) => {
           ...styles.parcheCard,
           backgroundColor: theme.colors.bgcardBuy,
         }}
-      />
+      /> */}
 
       <View
         style={{
@@ -164,17 +163,16 @@ const BuyScreen = ({route, navigation}: Props) => {
         }}>
         <View
           style={{
-            marginHorizontal: 40,
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            padding: 10,
           }}>
           <View
             style={{
+              flex: 1,
               alignItems: 'center',
             }}>
-            <Icon name="cart-outline" size={35} color="white" />
+            <Icon name="cart-outline" size={25} color={theme.colors.text} />
             <Text
               style={{color: theme.colors.border, marginTop: 2, fontSize: 12}}>
               Total Drinks
@@ -184,31 +182,45 @@ const BuyScreen = ({route, navigation}: Props) => {
           <View
             style={{
               alignItems: 'center',
-              marginRight: 40,
+              flex: 1,
             }}>
             <Text
               style={{
                 color: theme.colors.text,
-                fontSize: 27,
-                marginRight: 10,
+                fontSize: 18,
                 marginBottom: 2,
                 fontWeight: 'bold',
               }}>
-              $32
+              $0
             </Text>
             <Text style={{color: theme.colors.border, fontSize: 12}}>
               Total Price
             </Text>
           </View>
 
-          <View style={{backgroundColor: 'red'}}>
-            <Text>Hola</Text>
+          <View
+            style={{
+              alignItems: 'center',
+              flex: 1,
+            }}>
+            <Text style={{color: theme.colors.border, fontSize: 12}}></Text>
           </View>
         </View>
       </View>
 
+      {/* Target for increase or decrement */}
+      <BuyCardTarget
+        cantidad
+        bottom={height / 2.5}
+        right={width - width / 1.05}
+      />
+
       {/* TODO: Pagar cont tarjeta */}
-      <BuyCardTarget top={780} height={130} />
+      <BuyCardTarget
+        bottom={height / 40}
+        height={height * 0.14}
+        right={width - width / 1.05}
+      />
     </View>
   );
 };
@@ -231,27 +243,27 @@ const styles = StyleSheet.create({
 
   effectCardEncima: {
     position: 'absolute',
-    width: 100,
+    width: 90,
     right: 0,
-    bottom: 65,
+    bottom: 90,
     borderBottomRightRadius: 50,
-    borderBottomLeftRadius: 100,
-    height: 140,
+    borderBottomLeftRadius: 10,
+    height: 110,
   },
 
   textCardEncima: {
-    fontSize: 32,
+    fontSize: 22,
     fontWeight: 'bold',
   },
 
   parcheCard: {
     position: 'absolute',
     width: '100%',
-    bottom: 95,
-    transform: [{rotate: '10deg'}],
+    bottom: 110,
+    transform: [{rotate: '7deg'}],
     borderBottomRightRadius: 40,
     borderBottomLeftRadius: 20,
-    height: 70,
+    height: 50,
   },
 
   ingredientItem: {

@@ -12,7 +12,7 @@ interface Props {
   left?: number;
 }
 
-const BtnBack = ({sumaTop = 50, topBtn = 10, left = 30}: Props) => {
+const BtnBack = ({sumaTop = 50, topBtn = 20, left = 30}: Props) => {
   const {top} = useSafeAreaInsets();
 
   const navigation = useNavigation();
@@ -20,20 +20,21 @@ const BtnBack = ({sumaTop = 50, topBtn = 10, left = 30}: Props) => {
   const {theme} = useContext(ThemeContext);
 
   return (
-    <View style={{paddingBottom: 20}}>
+    <View style={{}}>
       <TouchableOpacity
         onPress={() => navigation.goBack()}
         style={{
           zIndex: 999,
           backgroundColor: theme.colors.primary,
-          width: 55,
-          height: 50,
+          width: 45,
+          height: 40,
           top: topBtn,
           left: left,
           borderRadius: 10,
           position: 'absolute',
           alignItems: 'center',
           justifyContent: 'center',
+          marginBottom: 20,
         }}>
         <Icon name="chevron-back-outline" size={25} color="white" />
       </TouchableOpacity>

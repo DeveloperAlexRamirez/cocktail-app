@@ -6,6 +6,7 @@ import {colors, globalStyles} from '../theme/appTheme';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import CocktailCard from '../components/CocktailCard';
 import BtnBack from '../components/BtnBack';
+import BtnBlackAndLight from '../components/BtnBlackAndLight';
 
 const CocktailScreen = () => {
   const {top} = useSafeAreaInsets();
@@ -23,7 +24,8 @@ const CocktailScreen = () => {
 
   return (
     <View style={globalStyles.globalMargin}>
-      <BtnBack left={0} />
+      <BtnBack left={0} topBtn={10} />
+      <BtnBlackAndLight />
       <FlatList
         data={coktail}
         keyExtractor={({strDrink}) => strDrink}

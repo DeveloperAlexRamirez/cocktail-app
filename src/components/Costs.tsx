@@ -9,21 +9,21 @@ const Costs = () => {
     <View>
       {/* Precios */}
 
-      <View style={{left: 40, flexDirection: 'row'}}>
+      <View style={{left: 20, flexDirection: 'row'}}>
         <View
           style={{
             ...styles.ingredientItem,
-            width: 150,
+            width: 110,
             backgroundColor: theme.colors.bgIngredientes,
           }}>
           <Text
             style={{
               color: theme.colors.textPrice,
               fontWeight: 'bold',
-              fontSize: 18,
+              fontSize: 10,
             }}>
             $8{' '}
-            <Text style={{color: theme.colors.textPrice, fontSize: 12}}>
+            <Text style={{color: theme.colors.textPrice, fontSize: 10}}>
               Price x Drink
             </Text>
           </Text>
@@ -33,16 +33,17 @@ const Costs = () => {
         <View
           style={{
             ...styles.ingredientItem,
-            width: 170,
+            width: 130,
             backgroundColor: theme.colors.bgIngredientes,
+            marginBottom: 10,
           }}>
           <Text
             style={{
               color: 'white',
               fontWeight: 'bold',
-              fontSize: 21,
+              fontSize: 15,
             }}>
-            $16 <Text style={{color: 'white', fontSize: 15}}>Total Price</Text>
+            $16 <Text style={{color: 'white', fontSize: 11}}>Total Price</Text>
           </Text>
         </View>
       </View>
@@ -60,6 +61,10 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
   },
+  // parcheCard: {
+  //   width: '100%',
+  //   height: 50,
+  // },
 });
 
 export default Costs;

@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {ThemeContext} from '../context/ThemeContext';
 import {useCounter} from '../hooks/useCounter';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {CarContext} from '../context/CarContext';
 
 interface Props {
   top?: number;
@@ -10,25 +11,31 @@ interface Props {
   height?: number;
   width?: number;
   right?: number;
+  bottom?: number;
 }
 
 const BuyCardTarget = ({
-  top = -35,
+  top = 0,
   cantidad,
   height = 140,
   width = 80,
+  bottom = 60,
+  right = 20,
 }: Props) => {
+  const {increment, decrement} = useContext(CarContext);
+
   const {theme} = useContext(ThemeContext);
-  const {decrement, increase, counter} = useCounter(0);
+  const {increase, counter} = useCounter();
 
   return (
     <View
       style={{
         ...styles.cardSale,
-        top: top,
         backgroundColor: theme.colors.cardsale,
         height: height,
         width: width,
+        bottom: bottom,
+        right: right,
       }}>
       {cantidad ? (
         <>
@@ -40,7 +47,7 @@ const BuyCardTarget = ({
               height: 30,
               borderRadius: 100,
             }}
-            onPress={increase}>
+            onPress={increment}>
             <Text style={{...styles.textBuy, color: theme.colors.text}}>+</Text>
           </TouchableOpacity>
 
@@ -75,8 +82,7 @@ const BuyCardTarget = ({
             width: width,
             height: height - 40,
           }}>
-          <Icon name="card-outline" size={30} color="white" />
-
+          <Icon name="cart-outline" size={30} color={theme.colors.textPrice} />
           <View>
             <Text style={{fontSize: 12, color: 'white'}}>Mastercard</Text>
           </View>
@@ -95,7 +101,6 @@ const BuyCardTarget = ({
 const styles = StyleSheet.create({
   cardSale: {
     position: 'absolute',
-    right: 50,
     borderRadius: 10,
     flexDirection: 'column',
     justifyContent: 'space-around',
@@ -104,7 +109,7 @@ const styles = StyleSheet.create({
   },
 
   textBuy: {
-    fontSize: 22,
+    fontSize: 19,
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',

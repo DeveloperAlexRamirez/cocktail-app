@@ -11,6 +11,8 @@ const useCoktailGeneral = () => {
     'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary%20Drink',
   );
 
+  const isMounted = useRef(true);
+
   const loadCoktails = async () => {
     const resp = await cocktailDB.get<CoktailResponse>(nextCategorie.current);
 
@@ -22,6 +24,10 @@ const useCoktailGeneral = () => {
 
   useEffect(() => {
     loadCoktails();
+
+    return () => {
+      isMounted.current = false;
+    };
   }, []);
 
   return {

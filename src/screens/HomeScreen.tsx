@@ -17,35 +17,24 @@ const HomeScreen = () => {
 
   const {theme} = useContext(ThemeContext);
 
-  const {height} = Dimensions.get('screen');
+  const {height, width} = Dimensions.get('screen');
 
   const {top} = useSafeAreaInsets();
 
   return (
     <>
-      {/* <View
-        style={{
-          position: 'absolute',
-          bottom: -18,
-          backgroundColor: theme.colors.notification,
-          borderTopRightRadius: 50,
-          borderTopLeftRadius: 50,
-          width: '100%',
-          height: 110,
-        }}
-      /> */}
       <View style={{...globalStyles.globalMargin, marginTop: top + 20}}>
         <View
           style={{
             ...styles.cardHeaderBg,
             backgroundColor: theme.colors.notification,
-            height: height * 0.55,
+            height: height * 0.56,
           }}>
           <Text style={{...styles.title, color: theme.colors.text}}>
             EmbriagApp
           </Text>
 
-          <View style={{width: 260}}>
+          <View style={{width: width * 0.7}}>
             <Text style={{...styles.subtitle, color: theme.colors.text}}>
               We provide a variety of fresh cocktails with varius flavors get
               fresh juice easly
@@ -55,74 +44,50 @@ const HomeScreen = () => {
           <View>
             <Image
               source={require('../assets/mojito.png')}
-              style={styles.mojito}
+              style={{...styles.mojito, width: width / 2, height: height * 0.3}}
             />
           </View>
-
-          {/* circle */}
-          {/* <View
-          style={{
-            position: 'absolute',
-            bottom: -10,
-            right: -10,
-            backgroundColor: theme.colors.background,
-            borderRadius: 100,
-            width: 60,
-            height: 60,
-          }}
-        /> */}
         </View>
 
-        <View style={{marginTop: 20}}>
-          <Text style={{fontSize: 26, color: theme.colors.text, top: 20}}>
-            Categories:
-          </Text>
+        {/* Categorias / imagenes */}
+        <View
+          style={{
+            width: '100%',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            height: height * 0.35,
+            paddingVertical: 20,
+          }}>
+          <TouchableOpacity
+            style={styles.imageCategoriContainer}
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate('CocktailScreen')}>
+            <Image
+              source={require('../assets/red-drink.jpg')}
+              style={{...styles.imageCategories, height: '100%'}}
+            />
+          </TouchableOpacity>
 
-          {/* Categorias / imagenes */}
-          <View
-            style={{
-              width: '100%',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              height: height * 0.35,
-            }}>
-            <TouchableOpacity
-              style={styles.imageCategoriContainer}
-              activeOpacity={0.8}
-              onPress={() => navigation.navigate('CocktailScreen')}>
-              <View style={styles.boxShadow}>
-                <Image
-                  source={require('../assets/red-drink.jpg')}
-                  style={styles.imageCategories}
-                />
-              </View>
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.imageCategoriContainer}
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate('CocktailScreen')}>
+            <Image
+              source={require('../assets/green-drink.jpeg')}
+              style={{...styles.imageCategories, height: '100%'}}
+            />
+          </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.imageCategoriContainer}
-              activeOpacity={0.8}
-              onPress={() => navigation.navigate('CocktailScreen')}>
-              <View style={styles.boxShadow}>
-                <Image
-                  source={require('../assets/green-drink.jpeg')}
-                  style={styles.imageCategories}
-                />
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.imageCategoriContainer}
-              activeOpacity={0.8}
-              onPress={() => navigation.navigate('CocktailScreen')}>
-              <View style={styles.boxShadow}>
-                <Image
-                  source={require('../assets/blue-drink.jpeg')}
-                  style={styles.imageCategories}
-                />
-              </View>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            style={styles.imageCategoriContainer}
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate('CocktailScreen')}>
+            <Image
+              source={require('../assets/blue-drink.jpeg')}
+              style={{...styles.imageCategories, height: '100%'}}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     </>
@@ -144,7 +109,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 38,
+    fontSize: 28,
     position: 'absolute',
     top: 160,
     left: 20,
@@ -152,14 +117,13 @@ const styles = StyleSheet.create({
   },
 
   subtitle: {
-    fontSize: 18,
+    fontSize: 16,
     position: 'absolute',
     top: 250,
     left: 20,
   },
 
   mojito: {
-    width: 280,
     height: 320,
     position: 'absolute',
     top: 60,
@@ -169,21 +133,9 @@ const styles = StyleSheet.create({
 
   imageCategories: {
     // flex: 1,
-    width: 130,
-    height: 210,
+    width: 'auto',
     borderRadius: 10,
-  },
-
-  imageCategoriContainer: {
-    shadowColor: 'red',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
+    marginHorizontal: 5,
   },
 
   boxShadow: {
@@ -196,6 +148,10 @@ const styles = StyleSheet.create({
     shadowRadius: 8.3,
 
     elevation: 6,
+  },
+
+  imageCategoriContainer: {
+    flex: 1,
   },
 });
 

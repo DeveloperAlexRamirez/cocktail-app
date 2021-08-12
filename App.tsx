@@ -1,7 +1,7 @@
 import React from 'react';
 import Navigator from './src/stack/Navigator';
-import {NavigationContainer} from '@react-navigation/native';
 import ThemeProvider from './src/context/ThemeContext';
+import CarProvider from './src/context/CarContext';
 
 const App = () => {
   return (
@@ -12,7 +12,11 @@ const App = () => {
 };
 
 const AppState = ({children}: any) => {
-  return <ThemeProvider>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider>
+      <CarProvider>{children}</CarProvider>
+    </ThemeProvider>
+  );
 };
 
 export default App;

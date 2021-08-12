@@ -31,10 +31,10 @@ const CocktailCard = ({cocktail}: Props) => {
           <View>
             <FadeInImage
               uri={cocktail.strDrinkThumb}
-              style={{width: 80, height: 80, borderRadius: 10, marginLeft: 5}}
+              style={{width: 50, height: 50, borderRadius: 10, marginLeft: 5}}
             />
           </View>
-          <View style={{justifyContent: 'center'}}>
+          <View style={{justifyContent: 'center', marginRight: 10}}>
             <Text style={{...styles.textCard, color: theme.colors.text}}>
               {cocktail.strDrink}
             </Text>
@@ -42,7 +42,7 @@ const CocktailCard = ({cocktail}: Props) => {
               style={{
                 ...styles.textCard,
                 color: 'grey',
-                fontSize: 16,
+                fontSize: 12,
               }}>
               id: {cocktail.idDrink}
             </Text>
@@ -56,7 +56,7 @@ const CocktailCard = ({cocktail}: Props) => {
 const styles = StyleSheet.create({
   cardContainer: {
     width: '100%',
-    height: 100,
+    height: 60,
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 10,
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
 
   textCard: {
-    fontSize: 21,
+    fontSize: 17,
     textAlign: 'left',
     left: 20,
     fontWeight: 'bold',
